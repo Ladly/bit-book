@@ -1,0 +1,1 @@
+export const POSTS_URL = 'http://bitbookapi.azurewebsites.net/api/posts'  
