@@ -19,11 +19,15 @@ export const createVideoPostInstance = (post) => {
 
 export const createPostInstance = (posts, textCallback, videoCallback, imageCallback) => {
 	return posts.map(post => {
+
 		if(post.type === 'text') {
+
 			return textCallback(post)
 		} else if(post.type === 'video') {
+
 			return videoCallback(post)
 		} else if(post.type === 'image') {
+
 			return imageCallback(post)
 		}
 	})
@@ -32,7 +36,7 @@ export const createPostInstance = (posts, textCallback, videoCallback, imageCall
 const makeYouTubeEmbedded = (url) => {
 	const embed = 'embed/'
 	const toReplace = 'watch?v='
-	const goodFormatUrl = url.replace(toReplace, embed)
-	return goodFormatUrl
+	const wellFormatedUrl = url.replace(toReplace, embed)
+	return wellFormatedUrl
 	
 }
