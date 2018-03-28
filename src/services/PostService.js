@@ -1,5 +1,9 @@
 import { POSTS_URL } from './../helpers/constants'
-import { createPostInstance } from './../helpers/utils'
+import { createPostInstance,
+	createTextPostInstance,
+	createImagePostInstance,
+	createVideoPostInstance
+} from './../helpers/utils'
 
 const options = {
 	method: 'GET',
@@ -14,7 +18,6 @@ export class PostService {
 	static fetchPosts() {
 		return fetch(POSTS_URL, options)
 			.then(response => response.json())
-			.then(response => createPostInstance(response))
-
+			.then(response => createPostInstance(response, createTextPostInstance, createVideoPostInstance, createImagePostInstance))
 	}
 }

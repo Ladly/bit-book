@@ -7,14 +7,14 @@ export const TextPost = (props) => {
 		<li>
 			<Link to="/details">
 				<div className="row">
-					<div className="col s12 m7">
+					<div className="col s12">
 						<div className="card">
-							<div className="card-image" height="315">
+							<div className="card-image center" >
 								<p>{props.text}</p>
 							</div>
 							<div className="card-content">
 								<hr />
-								{/* <p><span>{props.type}</span> <span className="right">{props.comments}</span></p> */}
+								<p><span>{props.type}</span> <span className="right">{props.commentsNo}</span></p>
 							</div>
 						</div>
 					</div>
@@ -25,6 +25,8 @@ export const TextPost = (props) => {
 }
 
 TextPost.propTypes = {
-	text: PropTypes.string
+	text: PropTypes.string,
+	type: PropTypes.string,
+	commentsNo: PropTypes.number
 }
 

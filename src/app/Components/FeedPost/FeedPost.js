@@ -7,21 +7,19 @@ import { TextPost } from './../TextPost/TextPost'
 import { VideoPost } from './../VideoPost/VideoPost'           
 
 export const FeedPost = (props) => {
-
+	const { posts } = props
 	const pickRenderer = (post) =>{
-		const { type, text } = post
-		if(type === 'video') {
-			return <VideoPost  src={props.videoUrl}/>			
-		} else if (type === 'text') {
-			return <TextPost text={text} />
-		} else if (type === 'image'){
-			return <ImagePost src={props.imageUrl}/>
+		if(post.type === 'video') {
+			return <VideoPost key={post.id} url={post.url} commentsNo={post.commentsNum} type={post.type}/>			
+		} else if (post.type === 'text') {
+			return <TextPost  key={post.id} text={post.text} commentsNo={post.commentsNum} type={post.type}/>
+		} else if (post.type === 'image'){
+			return <ImagePost  key={post.id} url={post.url} commentsNo={post.commentsNum} type={post.type}/>
 		}
 	}
 
 	const mapProps = () => {		
-		return props.posts.map((post) => {
-			console.log(post)
+		return posts.map((post) => {
 			return pickRenderer(post)
 		})
 	}

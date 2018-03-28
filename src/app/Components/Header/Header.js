@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export const Header = () => {
+export const Header = (props) => {
 	return (
 		<nav className="#b39ddb #512da8 deep-purple darken-2">
 			<div className="nav-wrapper container">
