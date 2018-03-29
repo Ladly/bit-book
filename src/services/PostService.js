@@ -1,11 +1,11 @@
 import {
-	POSTS_URL, 
-	IMAGE_POST_REQUEST_URL, 
-	TEXT_POST_REQUEST_URL, 
-	VIDEO_POST_REQUEST_URL 
+	POSTS_URL,
+	IMAGE_POST_REQUEST_URL,
+	TEXT_POST_REQUEST_URL,
+	VIDEO_POST_REQUEST_URL
 } from './../helpers/constants'
 
-import { 
+import {
 	createPostInstance,
 	createTextPostInstance,
 	createImagePostInstance,
@@ -41,21 +41,19 @@ export class PostService {
 	}
 
 	static postTextRequest(postText) {
-		const postOptions = createOptions({text: postText})
+		const postOptions = createOptions({ text: postText })
 		return fetch(TEXT_POST_REQUEST_URL, postOptions)
-			.then(response => console.log(response))
 	}
 	// look for prev example and understand it
-	static postVideoRequest(body) {
-		const postOptions = createOptions(body)
+	static postVideoRequest(postVideo) {
+		const postOptions = createOptions({ videoUrl: postVideo })
+		console.log(postOptions)
 		return fetch(VIDEO_POST_REQUEST_URL, postOptions)
-			.then(response => console.log(response))
 	}
 
-	static postImageRequest(body) {
-		const postOptions = createOptions(body)
+	static postImageRequest(postImage) {
+		const postOptions = createOptions({ imageUrl: postImage })
 		return fetch(IMAGE_POST_REQUEST_URL, postOptions)
-			.then(response => console.log(response))
 	}
 
 }
