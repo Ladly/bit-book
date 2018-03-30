@@ -1,43 +1,32 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Input } from './../Input/Input'
 
-export const Modal = (props) => {
-	console.log('modal', props)
+class Modal extends Component {
+	constructor(props) {
+		super(props)
+		this.type = ''
+		console.log('modal', props)
+	}
 
-	const inputToRender = () => {
-		if (props.type === 'text') {
-			return <Input
-				type={'text'} //for input type
-				value={props.value}
-				onChange={props.handleChange}
-				fetchFreshData={props.fetchFreshData}
-				clickHandler={props.clickTextHandler}
-			/>
-		} else if (props.type === 'video') {
-			return <Input
-				type={'video'}
-				value={props.value}
-				onChange={props.handleChange}
-				fetchFreshData={props.fetchFreshData}
-				clickHandler={props.clickVideoHandler}
-			/>
-		} else if (props.type === 'image') {
-			return <Input
-				type={'image'}
-				value={props.value}
-				onChange={props.handleChange}
-				fetchFreshData={props.fetchFreshData}
-				clickHandler={props.clickImageHandler}
-			/>
+	pickType = () => {
+		if (parseInt(this.props.id) === 1) {
+			return this.type = 'text'
+		} else if (parseInt(this.props.id) === 2) {
+			return this.type = 'video'
+		} else if (parseInt(this.props.id) === 3) {
+			return this.type = 'image'
 		}
 	}
 
-
-	return (
-		<div id='modal' className="modal">
-			<div className="modal-content">
-				{inputToRender()}
+	render() {
+		return (
+			<div id={`modal${this.props.id}`} className="modal">
+				<div className="modal-content">
+					<Input type={this.pickType()} fetchFreshData={this.props.fetchFreshData} sendData={this.props.sendData} onChange={this.props.onChange} value={this.props.value} />
+				</div>
 			</div>
-		</div>
-	)
+		)
+	}
 }
+
+export { Modal }

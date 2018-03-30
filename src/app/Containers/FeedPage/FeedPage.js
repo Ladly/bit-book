@@ -15,8 +15,7 @@ class FeedPage extends Component {
 		super(props)
 		this.state = {
 			posts: [],
-			inputValue: '',
-			inputType: ''
+			inputValue: ''
 		}
 	}
 
@@ -33,10 +32,14 @@ class FeedPage extends Component {
 		this.fetchPosts()
 
 		const buttonElement = document.querySelector('.fixed-action-btn')
-		const modalElement = document.querySelector('#modal')
+		const modalElement1 = document.querySelector('#modal1')
+		const modalElement2 = document.querySelector('#modal2')
+		const modalElement3 = document.querySelector('#modal3')
 
 		M.FloatingActionButton.init(buttonElement)
-		this.modal = M.Modal.init(modalElement)
+		this.modal1 = M.Modal.init(modalElement1)
+		this.modal2 = M.Modal.init(modalElement2)
+		this.modal3 = M.Modal.init(modalElement3)
 	}
 
 	handleChange = (e) => {
@@ -49,23 +52,21 @@ class FeedPage extends Component {
 	sendTextData = () => {
 		const body = this.state.inputValue
 		PostService.postTextRequest(body)
-		this.modal.close()
-		this.clearInput()
-	}
-
-	sendImageData = () => {
-		const body = this.state.inputValue
-		// testImages(body)
-
-		PostService.postImageRequest(body)
-		this.modal.close()
+		this.modal1.close()
 		this.clearInput()
 	}
 
 	sendVideoData = () => {
 		const body = this.state.inputValue
 		PostService.postVideoRequest(body)
-		this.modal.close()
+		this.modal2.close()
+		this.clearInput()
+	}
+
+	sendImageData = () => {
+		const body = this.state.inputValue
+		PostService.postImageRequest(body)
+		this.modal3.close()
 		this.clearInput()
 	}
 
@@ -76,13 +77,6 @@ class FeedPage extends Component {
 		})
 	}
 
-	getType = (type) => {
-		this.setState({
-			...this.state,
-			inputType: type
-		})
-	}
-
 	render() {
 		return (
 			<div className="container">
@@ -90,18 +84,13 @@ class FeedPage extends Component {
 					<FeedPost posts={this.state.posts} />
 				</ul>
 
-				<Modal
-					type={this.state.inputType}
-					value={this.state.inputValue}
-					fetchFreshData={this.fetchPosts}
-					handleChange={this.handleChange}
-					clickTextHandler={this.sendTextData}
-					clickImageHandler={this.sendImageData}
-					clickVideoHandler={this.sendVideoData}
-				/>
+				<ImageModal />
+				
+				<Modal id={1} sendData={this.sendTextData} value={this.state.inputValue} fetchFreshData={this.fetchPosts} onChange={this.handleChange} />
+				<Modal id={2} sendData={this.sendVideoData} value={this.state.inputValue} fetchFreshData={this.fetchPosts} onChange={this.handleChange} />
+				<Modal id={3} sendData={this.sendImageData} value={this.state.inputValue} fetchFreshData={this.fetchPosts} onChange={this.handleChange} />
 
-				<FloatButtons getType={this.getType} />
-
+				<FloatButtons />
 			</div>
 		)
 	}

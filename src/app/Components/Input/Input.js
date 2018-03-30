@@ -2,25 +2,32 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './Input.css'
 
+import { PostService } from './../../../services/PostService'
+
 export const Input = (props) => {
+	console.log('input', props)
 	const submitData = () => {
-		props.clickHandler()
+		props.sendData()
 		props.fetchFreshData()
 	}
 
 	const pickDisplay = () => {
 		if (props.type === 'text') {
-			return 'add text'
+			return 'Add Text'
 		} else if (props.type === 'video') {
-			return 'add video'
+			return 'Add video'
 		} else if (props.type === 'image') {
-			return 'add image'
+			return 'Add image'
 		}
+	}
+
+	const pickType = () => {
+		return props.type === 'text' ? 'text' : 'url'
 	}
 
 	return (
 		<div>
-			<input type={props.type} value={props.value} onChange={props.onChange} />
+			<input type={pickType()} value={props.value} onChange={props.onChange} />
 			<div className="buttons">
 				<span className="helper-text" data-error="wrong" data-success="right">{pickDisplay()}</span>
 				<button className="right" onClick={submitData}>Add</button>
