@@ -4,9 +4,9 @@ import { withRouter } from 'react-router-dom'
 import M from 'materialize-css'
 
 import { PostService } from './../../../services/PostService'
+import { testImages } from './../../../helpers/utils'
 
 import { FeedPost } from './../../Components/FeedPost/FeedPost'
-import { Input } from './../../Components/Input/Input'
 import { FloatButtons } from './../../Components/FloatButtons/FloatButtons'
 import { Modal } from './../../Components/Modal/Modal'
 
@@ -16,23 +16,8 @@ class FeedPage extends Component {
 		this.state = {
 			posts: [],
 			inputValue: '',
-			modalInstance: 0
+			inputType: ''
 		}
-		this.inputsContent = {
-			text: {
-				helper: 'Add text',
-				type: 'text',
-			},
-			video: {
-				helper: 'Add video url',
-				type: 'url',
-			},
-			image: {
-				helper: 'Add image url',
-				type: 'url',
-			}
-		}
-
 	}
 
 	fetchPosts = () => {
@@ -48,14 +33,10 @@ class FeedPage extends Component {
 		this.fetchPosts()
 
 		const buttonElement = document.querySelector('.fixed-action-btn')
-		const modalElement1 = document.querySelector('#modal1')
-		const modalElement2 = document.querySelector('#modal2')
-		const modalElement3 = document.querySelector('#modal3')
+		const modalElement = document.querySelector('#modal')
 
 		M.FloatingActionButton.init(buttonElement)
-		this.modal1 = M.Modal.init(modalElement1)
-		this.modal2 = M.Modal.init(modalElement2)
-		this.modal3 = M.Modal.init(modalElement3)				
+		this.modal = M.Modal.init(modalElement)
 	}
 
 	handleChange = (e) => {
@@ -68,16 +49,24 @@ class FeedPage extends Component {
 	sendTextData = () => {
 		const body = this.state.inputValue
 		PostService.postTextRequest(body)
+		this.modal.close()
+		this.clearInput()
 	}
 
 	sendImageData = () => {
 		const body = this.state.inputValue
+		// testImages(body)
+
 		PostService.postImageRequest(body)
+		this.modal.close()
+		this.clearInput()
 	}
 
 	sendVideoData = () => {
 		const body = this.state.inputValue
 		PostService.postVideoRequest(body)
+		this.modal.close()
+		this.clearInput()
 	}
 
 	clearInput = () => {
@@ -87,59 +76,31 @@ class FeedPage extends Component {
 		})
 	}
 
-	checkButton = () => {
+	getType = (type) => {
 		this.setState({
-			modalInstance: 2
+			...this.state,
+			inputType: type
 		})
 	}
-	
-	render() {	
-		console.log(this.state.modalInstance)	
+
+	render() {
 		return (
-			<div className="container">				
+			<div className="container">
 				<ul>
 					<FeedPost posts={this.state.posts} />
 				</ul>
-				{/* <div id="modal1" className="modal">
-					<Input 
-				
-		
-					/>
-				</div>
-				<div id="modal2" className="modal">
-					<Input 
-						description={this.inputsContent.image} 
-						value={this.state.inputValue} 
-						handleChange={this.handleChange} 
-						clickHandler={this.sendImageData}
-						fetchFreshData={this.fetchPosts}
-						modalInstance = {this.modal2} 
-						clearInput={this.clearInput}
-					/>	
-				</div>
-				<div id="modal3" className="modal">
-					<Input 
-						description={this.inputsContent.video} 
-						value={this.state.inputValue} 
-						handleChange={this.handleChange} 
-						clickHandler={this.sendVideoData}
-						fetchFreshData={this.fetchPosts}
-						modalInstance = {this.modal3}
-						clearInput={this.clearInput}  
-					/>
-				</div> */}
 
-				<Modal 
+				<Modal
+					type={this.state.inputType}
 					value={this.state.inputValue}
 					fetchFreshData={this.fetchPosts}
-					clearInput={this.clearInput}
-					description={this.inputsContent} 						 
-					handleChange={this.handleChange} 
-					clickHandler={this.sendTextData}
-					modalInstance = {this.state.modalInstance}
+					handleChange={this.handleChange}
+					clickTextHandler={this.sendTextData}
+					clickImageHandler={this.sendImageData}
+					clickVideoHandler={this.sendVideoData}
 				/>
 
-				<FloatButtons checkButton={this.checkButton}/>
+				<FloatButtons getType={this.getType} />
 
 			</div>
 		)

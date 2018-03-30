@@ -3,20 +3,26 @@ import PropTypes from 'prop-types'
 import './Input.css'
 
 export const Input = (props) => {
-	const { description } = props
-
 	const submitData = () => {
 		props.clickHandler()
-		props.clearInput()  
 		props.fetchFreshData()
-		props.modalInstance.close()
+	}
+
+	const pickDisplay = () => {
+		if (props.type === 'text') {
+			return 'add text'
+		} else if (props.type === 'video') {
+			return 'add video'
+		} else if (props.type === 'image') {
+			return 'add image'
+		}
 	}
 
 	return (
 		<div>
-			<input type={props.type} value={props.value} onChange={props.handleChange}/>
+			<input type={props.type} value={props.value} onChange={props.onChange} />
 			<div className="buttons">
-				<span className="helper-text" data-error="wrong" data-success="right">{props.helper}</span>
+				<span className="helper-text" data-error="wrong" data-success="right">{pickDisplay()}</span>
 				<button className="right" onClick={submitData}>Add</button>
 			</div>
 		</div>

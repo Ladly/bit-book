@@ -20,13 +20,13 @@ export const createVideoPostInstance = (post) => {
 export const createPostInstance = (posts, textCallback, videoCallback, imageCallback) => {
 	return posts.map(post => {
 
-		if(post.type === 'text') {
+		if (post.type === 'text') {
 
 			return textCallback(post)
-		} else if(post.type === 'video') {
+		} else if (post.type === 'video') {
 
 			return videoCallback(post)
-		} else if(post.type === 'image') {
+		} else if (post.type === 'image') {
 
 			return imageCallback(post)
 		}
@@ -38,5 +38,14 @@ const makeYouTubeEmbedded = (url) => {
 	const toReplace = 'watch?v='
 	const wellFormatedUrl = url.replace(toReplace, embed)
 	return wellFormatedUrl
-	
+
+}
+
+export const testImages = (url) => {
+	const partToTest = url.slice(0, url.length - 3)
+	console.log(partToTest)
+	if (partToTest !== 'jpg' || 'png' || 'gif') {
+		alert('bad input')
+		return
+	}
 }
