@@ -45,16 +45,17 @@ export class PostService {
 		return fetch(TEXT_POST_REQUEST_URL, postOptions)
 	}
 
-	static postImageRequest(postImage) {
-		const postOptions = createOptions({ imageUrl: postImage })
-		console.log(postOptions)
-		return fetch(IMAGE_POST_REQUEST_URL, postOptions)
-	}
-
+	
 	static postVideoRequest(postVideo) {
 		const postOptions = createOptions({ videoUrl: postVideo })
 		console.log(postOptions)
 		return fetch(VIDEO_POST_REQUEST_URL, postOptions)
+	}
+	
+	static postImageRequest(postImage) {
+		const postOptions = createOptions({ imageUrl: postImage })
+		console.log(postOptions)
+		return fetch(IMAGE_POST_REQUEST_URL, postOptions)
 	}
 
 

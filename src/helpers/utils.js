@@ -38,14 +38,15 @@ const makeYouTubeEmbedded = (url) => {
 	const toReplace = 'watch?v='
 	const wellFormatedUrl = url.replace(toReplace, embed)
 	return wellFormatedUrl
-
 }
 
-export const testImages = (url) => {
-	const partToTest = url.slice(0, url.length - 3)
-	console.log(partToTest)
-	if (partToTest !== 'jpg' || 'png' || 'gif') {
-		alert('bad input')
-		return
+export const testVideo = (url) =>{
+	console.log(url.search('/embed/'))
+	if(url.search('/embed/')) {
+		return true
 	}
+
+	return false
 }
+
+
