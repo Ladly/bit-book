@@ -2,14 +2,16 @@ import {
 	POSTS_URL,
 	IMAGE_POST_REQUEST_URL,
 	TEXT_POST_REQUEST_URL,
-	VIDEO_POST_REQUEST_URL
+	VIDEO_POST_REQUEST_URL,
 } from './../helpers/constants'
 
 import {
 	createPostInstance,
 	createTextPostInstance,
 	createImagePostInstance,
-	createVideoPostInstance
+	createVideoPostInstance,
+	createCommentsInstance,
+	makeYouTubeEmbedded
 } from './../helpers/utils'
 
 const getOptions = {
@@ -48,17 +50,32 @@ export class PostService {
 	
 	static postVideoRequest(postVideo) {
 		const postOptions = createOptions({ videoUrl: postVideo })
-		console.log(postOptions)
 		return fetch(VIDEO_POST_REQUEST_URL, postOptions)
 	}
 	
 	static postImageRequest(postImage) {
 		const postOptions = createOptions({ imageUrl: postImage })
-		console.log(postOptions)
 		return fetch(IMAGE_POST_REQUEST_URL, postOptions)
 	}
+	
+	static singleTextPostRequest(id, type) {
+		return fetch(`http://bitbookapi.azurewebsites.net/api/TextPosts/${id}`, getOptions)
+			.then(response => response.json())
+	}
 
+	static singleVideoPostRequest(id) {
+		return fetch(`http://bitbookapi.azurewebsites.net/api/VideoPosts/${id}`, getOptions)
+			.then(response => response.json())
+	}
 
+	static singleImagePostRequest(id) {
+		return fetch(`http://bitbookapi.azurewebsites.net/api/ImagePosts/${id}`, getOptions)
+			.then(response => response.json())
+	}
+
+	static postCommentsFetch(id) {
+		return fetch(`http://bitbookapi.azurewebsites.net/api/Comments?postId=${id}`, getOptions)
+			.then(response => response.json())
+			.then(comments =>  comments.map(comment => createCommentsInstance(comment)))
+	}
 }
-
-export const postText = new PostService()

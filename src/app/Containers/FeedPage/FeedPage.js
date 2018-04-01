@@ -37,9 +37,7 @@ class FeedPage extends Component {
 	render() {
 		return (
 			<div className="container">
-				<ul>
-					<FeedPost posts={this.state.posts} />
-				</ul>
+				<FeedPost posts={this.state.posts} />
 
 				<TextModal getFreshData={this.fetchPosts} />
 				<VideoModal getFreshData={this.fetchPosts} />

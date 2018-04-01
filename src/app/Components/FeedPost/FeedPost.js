@@ -2,19 +2,20 @@ import React from 'react'
 
 import PropTypes from 'prop-types'
 
-import { ImagePost } from './../ImagePost/ImagePost'           
-import { TextPost } from './../TextPost/TextPost'           
-import { VideoPost } from './../VideoPost/VideoPost'           
+import { PostListItem } from './../PostListItem/PostListItem'     
 
 export const FeedPost = (props) => {
 	const { posts } = props
 	const pickRenderer = (post) =>{
 		if(post.type === 'video') {
-			return <VideoPost key={post.id} url={post.url} commentsNo={post.commentsNum} type={post.type}/>			
+
+			return <PostListItem key={post.id} id={post.id} url={post.url} commentsNo={post.commentsNum} type={post.type} />		
 		} else if (post.type === 'text') {
-			return <TextPost  key={post.id} text={post.text} commentsNo={post.commentsNum} type={post.type}/>
+			
+			return <PostListItem key={post.id} id={post.id} text={post.text} commentsNo={post.commentsNum} type={post.type} />
 		} else if (post.type === 'image'){
-			return <ImagePost  key={post.id} url={post.url} commentsNo={post.commentsNum} type={post.type}/>
+			
+			return 	<PostListItem key={post.id} id={post.id} url={post.url} commentsNo={post.commentsNum} type={post.type} />
 		}
 	}
 
@@ -29,7 +30,6 @@ export const FeedPost = (props) => {
 			{mapProps()}
 		</ul>		
 	)
-
 }
 
 FeedPost.propTypes = {

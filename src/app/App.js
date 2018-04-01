@@ -6,6 +6,7 @@ import 'materialize-css/dist/js/materialize.min.js'
 import { Header } from './Components/Header/Header'
 import { Footer } from './Components/Footer/Footer'
 import  FeedPage  from './Containers/FeedPage/FeedPage'
+import { PostDetailsPage }  from './Containers/PostDetailsPage/PostDetailsPage'
 
 export const App = () => {
 	return (
@@ -13,6 +14,7 @@ export const App = () => {
 			<Header />
 			<Switch>
 				<Route exact path="/" component={FeedPage} />
+				<Route exact path="/details/:type/:id"  component={PostDetailsPage}/>
 				<Route exact path="/people" />
 				<Route exact path="/profile" />
 			</Switch>

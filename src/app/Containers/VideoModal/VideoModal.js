@@ -5,7 +5,6 @@ import M from 'materialize-css'
 
 import { ModalView } from '../../Components/ModalView/ModalView'
 import { PostService } from './../../../services/PostService'
-import { testVideo } from './../../../helpers/utils'
 
 class VideoModal extends Component {
 	constructor() {

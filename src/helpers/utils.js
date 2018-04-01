@@ -1,6 +1,8 @@
 import { VideoPosts } from './../entities/VideoPosts'
 import { ImagePosts } from './../entities/ImagePosts'
 import { TextPosts } from './../entities/TextPosts'
+import { Comments } from './../entities/Comments'
+
 
 export const createTextPostInstance = (post) => {
 	return new TextPosts(post.text, post.type, post.commentsNum, post.userId, post.id)
@@ -33,20 +35,17 @@ export const createPostInstance = (posts, textCallback, videoCallback, imageCall
 	})
 }
 
-const makeYouTubeEmbedded = (url) => {
+export const makeYouTubeEmbedded = (url) => {
 	const embed = 'embed/'
 	const toReplace = 'watch?v='
 	const wellFormatedUrl = url.replace(toReplace, embed)
 	return wellFormatedUrl
 }
 
-export const testVideo = (url) =>{
-	console.log(url.search('/embed/'))
-	if(url.search('/embed/')) {
-		return true
-	}
-
-	return false
+export const createCommentsInstance = ({id, authorName, body, dateCreated, postId, authorId}) => {
+	
+	return new Comments (id, authorName, body, dateCreated, postId, authorId)
 }
+
 
 
