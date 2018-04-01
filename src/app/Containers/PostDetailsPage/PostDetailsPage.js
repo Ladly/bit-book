@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { CardDetailHolder } from './../../Components/CardDetailHolder/CardDetailHolder'
 import { CommentListItem } from './../../Components/CommentListItem/CommentListItem'
+import { CommentInput } from './../../Components/CommentInput/CommentInput'
 
 import { PostService } from './../../../services/PostService'
 
@@ -11,7 +12,8 @@ class PostDetailsPage extends Component {
 
 		this.state = {
 			post: null,
-			comments: []
+			comments: [],
+			commentInputValue: ''
 		}
 
 		this.postId = this.props.match.params.id
@@ -34,6 +36,9 @@ class PostDetailsPage extends Component {
 	getCommentsWithId = () => {
 		PostService.postCommentsFetch(this.postId)
 			.then(comments => this.setState({...this.state, comments}))
+			.then(() => {
+
+			})
 	}
 
 	createCommentCards = () => {
@@ -51,11 +56,46 @@ class PostDetailsPage extends Component {
 		this.getCommentsWithId()
 	}
 
+	postComment = ()  => {
+		const data = {
+			body: this.state.commentInputValue,
+			postId: this.postId
+		}
+
+		PostService.postCommentsPost(data)
+	}
+
+	handleChange = (e) => {
+		this.setState({...this.state, commentInputValue: e.target.value})
+	}
+
+	clearInput = () => {
+		this.setState({
+			...this.state,
+			commentInputValue: ''
+		})
+	}
+
+	reverseComments = () => {
+		this.setState({
+			...this.state,
+			comments: this.state.comments.reverse()
+		})
+	}
+
+	handleSubmit = () => {
+		this.postComment()
+		this.getCommentsWithId()
+		this.clearInput() 
+		this.reverseComments()
+	
+	}
+
 	render() {
-		console.log(this.state.comments)
 		return (
 			<div className ='container'>
 				<CardDetailHolder cardDetails={this.state.post} type={this.type} />
+				<CommentInput value={this.state.commentInputValue} onChange={this.handleChange} submit={this.handleSubmit} />
 				<ul className='center-align'>
 					{this.createCommentCards()}
 				</ul>

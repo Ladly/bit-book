@@ -78,4 +78,9 @@ export class PostService {
 			.then(response => response.json())
 			.then(comments =>  comments.map(comment => createCommentsInstance(comment)))
 	}
+
+	static postCommentsPost(data){
+		const postOptions = createOptions(data)
+		return fetch('http://bitbookapi.azurewebsites.net/api/Comments', postOptions)
+	}
 }
