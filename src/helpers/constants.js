@@ -3,4 +3,27 @@ export const IMAGE_POST_REQUEST_URL = 'http://bitbookapi.azurewebsites.net/api/I
 export const TEXT_POST_REQUEST_URL = 'http://bitbookapi.azurewebsites.net/api/TextPosts'
 export const VIDEO_POST_REQUEST_URL = 'http://bitbookapi.azurewebsites.net/api/VideoPosts' 
 
+export const PROFILE_URL = 'http://bitbookapi.azurewebsites.net/api/profile'
+
+export const GETOPTIONS = {
+	method: 'GET',
+	headers: {
+		'Content-Type': 'application/json',
+		'Key': 'bitbook',
+		'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+	}
+}
+
+export const CREATEOPTIONS = (body) => { 
+	return {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Key': 'bitbook',
+			'SessionId': '7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94'
+		},
+		body: JSON.stringify(body)
+	}
+}
+
 

@@ -36,9 +36,6 @@ class PostDetailsPage extends Component {
 	getCommentsWithId = () => {
 		PostService.postCommentsFetch(this.postId)
 			.then(comments => this.setState({...this.state, comments}))
-			.then(() => {
-
-			})
 	}
 
 	createCommentCards = () => {
@@ -87,8 +84,7 @@ class PostDetailsPage extends Component {
 		this.postComment()
 		this.getCommentsWithId()
 		this.clearInput() 
-		this.reverseComments()
-	
+		this.reverseComments()	
 	}
 
 	render() {

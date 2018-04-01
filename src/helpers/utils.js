@@ -2,6 +2,7 @@ import { VideoPosts } from './../entities/VideoPosts'
 import { ImagePosts } from './../entities/ImagePosts'
 import { TextPosts } from './../entities/TextPosts'
 import { Comments } from './../entities/Comments'
+import { Profile } from './../entities/Profile'
 
 
 export const createTextPostInstance = (post) => {
@@ -45,6 +46,11 @@ export const makeYouTubeEmbedded = (url) => {
 export const createCommentsInstance = ({id, authorName, body, dateCreated, postId, authorId}) => {
 	
 	return new Comments (id, authorName, body, dateCreated, postId, authorId)
+}
+
+export const createProfileInstance = ({userId, name, email, aboutShort, about, avatarUrl, postsCount, commentsCount}) => {
+
+	return new Profile(userId, name, email, aboutShort, about, avatarUrl, postsCount, commentsCount)
 }
 
 
