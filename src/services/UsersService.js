@@ -1,6 +1,5 @@
 import {
 	GETOPTIONS,
-	CREATEOPTIONS,
 	USERS_PROFILES_REQUEST_URL
 } from './../helpers/constants'
 

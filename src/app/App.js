@@ -2,7 +2,6 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import 'materialize-css/dist/css/materialize.css'
 import 'materialize-css/dist/js/materialize.min.js'
-import M from 'materialize-css'
 
 import { Header } from './Components/Header/Header'
 import { Footer } from './Components/Footer/Footer'

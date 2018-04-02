@@ -1,7 +1,8 @@
 import {
 	GETOPTIONS,
-	CREATEOPTIONS,
-	PROFILE_URL
+	CREATEPUTOPTIONS,
+	PROFILE_URL,
+	UPDATE_PROFILE_URL
 } from './../helpers/constants'
 
 import {
@@ -18,5 +19,10 @@ export class ProfileService {
 	static fetchProfileWithId = (id) => {
 		return fetch(`http://bitbookapi.azurewebsites.net/api/users/${id}`, GETOPTIONS)
 			.then(response => response.json())
+	}
+
+	static updateProfile = (data) => {
+		console.log(data)
+		return fetch(UPDATE_PROFILE_URL, CREATEPUTOPTIONS(data))
 	}
 }

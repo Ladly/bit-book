@@ -25,11 +25,16 @@ class ProfilePage extends Component {
 		}
 	}
 
+	sendData = (data) => {
+		ProfileService.updateProfile(data)
+			.then(() => ProfileService.fetchProfile())
+	}
+
 	render() {
 		return (
 			<div className="container">
 				<ProfileCard profile={this.state.profile} />
-				<EditProfileModal />
+				<EditProfileModal getData={this.sendData}/>
 				<a className="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal4"><i className="material-icons">edit</i></a>
 			</div>
 		)

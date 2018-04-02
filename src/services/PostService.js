@@ -13,7 +13,6 @@ import {
 	createImagePostInstance,
 	createVideoPostInstance,
 	createCommentsInstance,
-	makeYouTubeEmbedded
 } from './../helpers/utils'
 
 
