@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import { UsersService } from './../../../services/UsersService'
 
-import { ProfileListItem } from './../../Components/ProfileListItem/ProfileListItem'
+import { ProfileListCard } from './../../Components/ProfileListCard/ProfileListCard'
 import { SearchInput } from './../../Components/SearchInput/SearchInput'
 import { createUsersInstance } from './../../../helpers/utils'
 
 
 class PeoplePage extends Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 
 		this.state = {
 			users: [],
@@ -19,14 +20,20 @@ class PeoplePage extends Component {
 
 	componentDidMount() {
 		UsersService.fetchUserProfiles()
-			.then(users => this.setState({ ...this.state, users }))
+			.then(users => this.setState({ users }))
 	}
 
 	makeProfileList = () => {
 		if (this.state.users.length) {
 			return this.state.users.map(user => {
 
-				return <ProfileListItem key={user.id} user={user} />
+				return (
+					<li key={user.id}>
+						<Link to={`/profile/${user.id}`}>
+							<ProfileListCard name={user.name} avatarUrl={user.avatarUrl} aboutShort={user.aboutShort} />
+						</Link>
+					</li>
+				)
 			})
 		} else {
 
@@ -37,7 +44,13 @@ class PeoplePage extends Component {
 	makeFilteredUsers = () => {
 		if (this.state.filteredUsers.length) {
 			return this.state.filteredUsers.map(filteredUser => {
-				return <ProfileListItem key={filteredUser.id} user={filteredUser} />
+				return (
+					<li key={filteredUser.id}>
+						<Link to={`/profile/${filteredUser.id}`}>
+							<ProfileListCard name={filteredUser.name} avatarUrl={filteredUser.avatarUrl} aboutShort={filteredUser.aboutShort} />
+						</Link>
+					</li>
+				)
 			})
 		}
 	}
@@ -56,8 +69,6 @@ class PeoplePage extends Component {
 	}
 
 	render() {
-		console.log(this.state.filteredUsers)
-		console.log(this.state.filteredUsers.length)
 		return (
 			<div className="container">
 				<SearchInput getCurrentInput={this.getCurrentInput} />

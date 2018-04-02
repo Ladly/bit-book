@@ -85,7 +85,6 @@ class PostDetailsPage extends Component {
 	}
 
 	render() {
-		console.log(this.state.comments)
 		return (
 			<div className='container'>
 				<CardDetailHolder cardDetails={this.state.post} type={this.type} />
