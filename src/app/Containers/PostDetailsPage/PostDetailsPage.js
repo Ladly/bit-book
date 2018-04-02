@@ -21,30 +21,30 @@ class PostDetailsPage extends Component {
 	}
 
 	getPostWithId = () => {
-		if(this.type === 'text') {
+		if (this.type === 'text') {
 			PostService.singleTextPostRequest(this.postId)
-				.then(post => this.setState({ ...this.state, post}))
-		} else if(this.type === 'video'){
+				.then(post => this.setState({ ...this.state, post }))
+		} else if (this.type === 'video') {
 			PostService.singleVideoPostRequest(this.postId)
-				.then(post => this.setState({ ...this.state, post}))
+				.then(post => this.setState({ ...this.state, post }))
 		} else {
 			PostService.singleImagePostRequest(this.postId)
-				.then(post => this.setState({ ...this.state, post}))
-		}		
+				.then(post => this.setState({ ...this.state, post }))
+		}
 	}
 
 	getCommentsWithId = () => {
 		PostService.postCommentsFetch(this.postId)
-			.then(comments => this.setState({...this.state, comments}))
+			.then(comments => this.setState({ comments }))
 	}
 
 	createCommentCards = () => {
-		if(this.state.comments.length) {
+		if (this.state.comments.length) {
 			return this.state.comments.map(comment => {
-				return <CommentListItem key={comment.id} body={comment.body} authorName={comment.authorName}/>
+				return <CommentListItem key={comment.id} body={comment.body} authorName={comment.authorName} />
 			})
-		} else if (this.state.comments) {			 
-			return <h2>no comments to display</h2>	
+		} else if (this.state.comments) {
+			return <h2>no comments to display</h2>
 		}
 	}
 
@@ -53,7 +53,7 @@ class PostDetailsPage extends Component {
 		this.getCommentsWithId()
 	}
 
-	postComment = ()  => {
+	postComment = () => {
 		const data = {
 			body: this.state.commentInputValue,
 			postId: this.postId
@@ -63,7 +63,7 @@ class PostDetailsPage extends Component {
 	}
 
 	handleChange = (e) => {
-		this.setState({...this.state, commentInputValue: e.target.value})
+		this.setState({ ...this.state, commentInputValue: e.target.value })
 	}
 
 	clearInput = () => {
@@ -75,7 +75,6 @@ class PostDetailsPage extends Component {
 
 	reverseComments = () => {
 		this.setState({
-			...this.state,
 			comments: this.state.comments.reverse()
 		})
 	}
@@ -83,13 +82,13 @@ class PostDetailsPage extends Component {
 	handleSubmit = () => {
 		this.postComment()
 		this.getCommentsWithId()
-		this.clearInput() 
-		this.reverseComments()	
+		this.clearInput()
+		this.reverseComments()
 	}
 
 	render() {
 		return (
-			<div className ='container'>
+			<div className='container'>
 				<CardDetailHolder cardDetails={this.state.post} type={this.type} />
 				<CommentInput value={this.state.commentInputValue} onChange={this.handleChange} submit={this.handleSubmit} />
 				<ul className='center-align'>

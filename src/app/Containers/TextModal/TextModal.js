@@ -42,19 +42,15 @@ class TextModal extends Component {
 
 	clearInput = () => {
 		this.setState({
-			...this.state,
 			inputValue: ''
 		})
 	}
 
 	handleChange = e => {
 		this.setState({
-			...this.state,
 			inputValue: e.target.value
 		})
 	}
-
-
 
 	render() {
 		return (

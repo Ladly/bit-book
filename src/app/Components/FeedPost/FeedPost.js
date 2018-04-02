@@ -6,6 +6,7 @@ import { PostListItem } from './../PostListItem/PostListItem'
 
 export const FeedPost = (props) => {
 	const { posts } = props
+	
 	const pickRenderer = (post) =>{
 		if(post.type === 'video') {
 
