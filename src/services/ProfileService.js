@@ -14,4 +14,9 @@ export class ProfileService {
 			.then(response => response.json())
 			.then(profile => createProfileInstance(profile))
 	}
+
+	static fetchProfileWithId = (id) => {
+		return fetch(`http://bitbookapi.azurewebsites.net/api/users/${id}`, GETOPTIONS)
+			.then(response => response.json())
+	}
 }

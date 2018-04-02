@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { CardDetailHolder } from './../../Components/CardDetailHolder/CardDetailHolder'
-import { CommentListItem } from './../../Components/CommentListItem/CommentListItem'
+import { CommentCard } from './../../Components/CommentCard/CommentCard'
 import { CommentInput } from './../../Components/CommentInput/CommentInput'
 
 import { PostService } from './../../../services/PostService'
@@ -34,17 +34,24 @@ class PostDetailsPage extends Component {
 	}
 
 	getCommentsWithId = () => {
-		PostService.postCommentsFetch(this.postId)
-			.then(comments => this.setState({ comments }))
+		return PostService.postCommentsFetch(this.postId)
+			.then(comments => this.setState({ comments: comments.reverse() }))
+			.then(() => {
+				this.clearInput()
+			})
 	}
 
 	createCommentCards = () => {
 		if (this.state.comments.length) {
 			return this.state.comments.map(comment => {
-				return <CommentListItem key={comment.id} body={comment.body} authorName={comment.authorName} />
+				return (
+					<li className='center-align' key={comment.id}>
+						<CommentCard authorName={comment.authorName} body={comment.body} authorId={comment.authorId} />
+					</li>
+				)
 			})
 		} else if (this.state.comments) {
-			return <h2>no comments to display</h2>
+			return <h2>No comments to display</h2>
 		}
 	}
 
@@ -63,30 +70,22 @@ class PostDetailsPage extends Component {
 	}
 
 	handleChange = (e) => {
-		this.setState({ ...this.state, commentInputValue: e.target.value })
+		this.setState({ commentInputValue: e.target.value })
 	}
 
 	clearInput = () => {
 		this.setState({
-			...this.state,
 			commentInputValue: ''
-		})
-	}
-
-	reverseComments = () => {
-		this.setState({
-			comments: this.state.comments.reverse()
 		})
 	}
 
 	handleSubmit = () => {
 		this.postComment()
 		this.getCommentsWithId()
-		this.clearInput()
-		this.reverseComments()
 	}
 
 	render() {
+		console.log(this.state.comments)
 		return (
 			<div className='container'>
 				<CardDetailHolder cardDetails={this.state.post} type={this.type} />
