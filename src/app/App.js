@@ -8,6 +8,7 @@ import { Footer } from './Components/Footer/Footer'
 import  FeedPage  from './Containers/FeedPage/FeedPage'
 import { PostDetailsPage }  from './Containers/PostDetailsPage/PostDetailsPage'
 import { ProfilePage }  from './Containers/ProfilePage/ProfilePage'
+import { PeoplePage }  from './Containers/PeoplePage/PeoplePage'
 
 export const App = () => {
 	return (
@@ -16,7 +17,7 @@ export const App = () => {
 			<Switch>
 				<Route exact path="/" component={FeedPage} />
 				<Route exact path="/details/:type/:id"  component={PostDetailsPage}/>
-				<Route exact path="/people" />
+				<Route exact path="/people" component={PeoplePage}/>
 				<Route exact path="/profile" component={ProfilePage}/>
 			</Switch>
 			<Footer />

@@ -3,6 +3,7 @@ import { ImagePosts } from './../entities/ImagePosts'
 import { TextPosts } from './../entities/TextPosts'
 import { Comments } from './../entities/Comments'
 import { Profile } from './../entities/Profile'
+import { Users } from './../entities/Users'
 
 
 export const createTextPostInstance = (post) => {
@@ -51,6 +52,10 @@ export const createCommentsInstance = ({id, authorName, body, dateCreated, postI
 export const createProfileInstance = ({userId, name, email, aboutShort, about, avatarUrl, postsCount, commentsCount}) => {
 
 	return new Profile(userId, name, email, aboutShort, about, avatarUrl, postsCount, commentsCount)
+}
+
+export const createUsersInstance = ({id, name, aboutShort, lastPostDate, avatarUrl}) => {
+	return new Users(id, name, aboutShort, lastPostDate, avatarUrl)
 }
 
 

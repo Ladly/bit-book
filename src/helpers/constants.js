@@ -3,6 +3,8 @@ export const IMAGE_POST_REQUEST_URL = 'http://bitbookapi.azurewebsites.net/api/I
 export const TEXT_POST_REQUEST_URL = 'http://bitbookapi.azurewebsites.net/api/TextPosts'
 export const VIDEO_POST_REQUEST_URL = 'http://bitbookapi.azurewebsites.net/api/VideoPosts' 
 
+export const USERS_PROFILES_REQUEST_URL = 'http://bitbookapi.azurewebsites.net/api/users' 
+
 export const PROFILE_URL = 'http://bitbookapi.azurewebsites.net/api/profile'
 
 export const GETOPTIONS = {
