@@ -18,11 +18,11 @@ export const PostListItem = (props) => {
 	const pickType = () => {
 		if(props.type === 'video') {			
 			return (
-				<li>
+				<li className="col s12">
 					<Link to={`/details/${props.type}/${props.id}`}>
 						<VideoCard url={props.url} id={props.id} commentsNo={props.commentsNo} type={props.type} />
 					</Link>	
-					{/* {displayDelete()}				 */}
+					{displayDelete()}				
 				</li>
 			)			
 		} else if (props.type === 'text') {
@@ -40,7 +40,7 @@ export const PostListItem = (props) => {
 					<Link to={`/details/${props.type}/${props.id}`}>
 						<ImageCard url={props.url} id={props.id} commentsNo={props.commentsNo} type={props.type} />
 					</Link>
-					{/* {displayDelete()} */}
+					{displayDelete()}
 				</li>
 			)		
 		}

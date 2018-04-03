@@ -2,7 +2,8 @@ import {
 	GETOPTIONS,
 	CREATEPUTOPTIONS,
 	PROFILE_URL,
-	UPDATE_PROFILE_URL
+	UPDATE_PROFILE_URL,
+	USERS_PROFILES_REQUEST_URL
 } from './../helpers/constants'
 
 import {
@@ -17,7 +18,7 @@ export class ProfileService {
 	}
 
 	static fetchProfileWithId = (id) => {
-		return fetch(`http://bitbookapi.azurewebsites.net/api/users/${id}`, GETOPTIONS)
+		return fetch(`${USERS_PROFILES_REQUEST_URL}/${id}`, GETOPTIONS)
 			.then(response => response.json())
 	}
 

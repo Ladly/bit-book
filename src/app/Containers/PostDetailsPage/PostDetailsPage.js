@@ -5,6 +5,7 @@ import { CommentCard } from './../../Components/CommentCard/CommentCard'
 import { CommentInput } from './../../Components/CommentInput/CommentInput'
 
 import { PostService } from './../../../services/PostService'
+import { CommentsService } from './../../../services/CommentsService'
 
 class PostDetailsPage extends Component {
 	constructor(props) {
@@ -34,11 +35,8 @@ class PostDetailsPage extends Component {
 	}
 
 	getCommentsWithId = () => {
-		return PostService.postCommentsFetch(this.postId)
-			.then(comments => this.setState({ comments: comments.reverse() }))
-			.then(() => {
-				this.clearInput()
-			})
+		return CommentsService.postCommentsFetch(this.postId)
+			.then((comments) => this.setState({ comments: comments.reverse() }))
 	}
 
 	createCommentCards = () => {
@@ -66,7 +64,7 @@ class PostDetailsPage extends Component {
 			postId: this.postId
 		}
 
-		PostService.postCommentsPost(data)
+		return CommentsService.postCommentsPost(data)
 	}
 
 	handleChange = (e) => {
@@ -81,7 +79,10 @@ class PostDetailsPage extends Component {
 
 	handleSubmit = () => {
 		this.postComment()
-		this.getCommentsWithId()
+			.then(() => {
+				this.getCommentsWithId()
+				this.clearInput()
+			})
 	}
 
 	render() {

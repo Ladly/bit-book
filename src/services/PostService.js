@@ -5,7 +5,8 @@ import {
 	VIDEO_POST_REQUEST_URL,
 	GETOPTIONS,
 	CREATEOPTIONS,
-	DEFAULTDELETEOPTIONS
+	DEFAULTDELETEOPTIONS,
+	DELETE_POST_REQUEST,
 } from './../helpers/constants'
 
 import {
@@ -13,7 +14,6 @@ import {
 	createTextPostInstance,
 	createImagePostInstance,
 	createVideoPostInstance,
-	createCommentsInstance,
 } from './../helpers/utils'
 
 
@@ -40,32 +40,21 @@ export class PostService {
 	}
 	
 	static singleTextPostRequest(id, type) {
-		return fetch(`http://bitbookapi.azurewebsites.net/api/TextPosts/${id}`, GETOPTIONS)
+		return fetch(`${TEXT_POST_REQUEST_URL}/${id}`, GETOPTIONS)
 			.then(response => response.json())
 	}
 
 	static singleVideoPostRequest(id) {
-		return fetch(`http://bitbookapi.azurewebsites.net/api/VideoPosts/${id}`, GETOPTIONS)
+		return fetch(`${VIDEO_POST_REQUEST_URL}/${id}`, GETOPTIONS)
 			.then(response => response.json())
 	}
 
 	static singleImagePostRequest(id) {
-		return fetch(`http://bitbookapi.azurewebsites.net/api/ImagePosts/${id}`, GETOPTIONS)
+		return fetch(`${IMAGE_POST_REQUEST_URL}/${id}`, GETOPTIONS)
 			.then(response => response.json())
-	}
-
-	static postCommentsFetch(id) {
-		return fetch(`http://bitbookapi.azurewebsites.net/api/Comments?postId=${id}`, GETOPTIONS)
-			.then(response => response.json())
-			.then(comments =>  comments.map(comment => createCommentsInstance(comment)))
-	}
-
-	static postCommentsPost(data){
-		const postOptions = CREATEOPTIONS(data)
-		return fetch('http://bitbookapi.azurewebsites.net/api/Comments', postOptions)
 	}
 
 	static deletePost(id) {
-		return fetch(`http://bitbookapi.azurewebsites.net/api/Posts/${id}`, DEFAULTDELETEOPTIONS)
+		return fetch(`${DELETE_POST_REQUEST}/${id}`, DEFAULTDELETEOPTIONS)
 	}
 }

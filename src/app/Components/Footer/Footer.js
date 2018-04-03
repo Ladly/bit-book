@@ -5,7 +5,7 @@ export const Footer = () => {
 		<footer className="page-footer #b39ddb #512da8 deep-purple darken-2">			
 			<div className="footer-copyright">
 				<div className="container">
-					<p><span>WolfTeam</span> © 2014 Copyright Text</p>				
+					<p><span>WolfTeam</span> © 2018 Copyright Text</p>				
 				</div>
 			</div>
 		</footer>

@@ -1,13 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CardContent } from './../CardContent/CardContent'
 
 export const TextCard = (props) => {
 
 	const displayCardContent = () => {
 		
 		if(props.type || props.commentsNo){
-			return <CardContent type={props.type} commentsNo={props.commentsNo}/>
+			return (
+				<div className="card-content">
+					<hr />
+					<p><span>{props.type}</span> <span className="right">{props.commentsNo}</span></p>
+				</div>
+			)
 		}
 	}
 
