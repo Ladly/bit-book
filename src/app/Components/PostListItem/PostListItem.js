@@ -8,25 +8,48 @@ import { ImageCard } from './../ImageCard/ImageCard'
 
 export const PostListItem = (props) => {
 
+	const displayDelete = () => {
+		if(props.loggedUserId === props.postUserId) {
+			return <button onClick={() => props.deletePost(props.id)} className="waves-effect waves-light btn random-button">Delete</button>
+		}
+	}
+
+
 	const pickType = () => {
-		if(props.type === 'video') {
-			
-			return <VideoCard url={props.url} commentsNo={props.commentsNo} type={props.type} />			
+		if(props.type === 'video') {			
+			return (
+				<li>
+					<Link to={`/details/${props.type}/${props.id}`}>
+						<VideoCard url={props.url} id={props.id} commentsNo={props.commentsNo} type={props.type} />
+					</Link>	
+					{/* {displayDelete()}				 */}
+				</li>
+			)			
 		} else if (props.type === 'text') {
-			
-			return <TextCard text={props.text} commentsNo={props.commentsNo} type={props.type} />
+			return (
+				<li>
+					<Link to={`/details/${props.type}/${props.id}`}>
+						<TextCard text={props.text} id={props.id} commentsNo={props.commentsNo} type={props.type} />
+					</Link>
+					{displayDelete()}
+				</li>
+			)
 		} else if (props.type === 'image'){
-			
-			return <ImageCard url={props.url} commentsNo={props.commentsNo} type={props.type} />
+			return (
+				<li>
+					<Link to={`/details/${props.type}/${props.id}`}>
+						<ImageCard url={props.url} id={props.id} commentsNo={props.commentsNo} type={props.type} />
+					</Link>
+					{/* {displayDelete()} */}
+				</li>
+			)		
 		}
 	}
 
 	return (
-		<li>
-			<Link to={`/details/${props.type}/${props.id}`}>
-				{pickType()}
-			</Link>
-	  	</li>
+		<React.Fragment>
+			{pickType()}
+		</React.Fragment>
 	)
 }
 
@@ -35,5 +58,8 @@ PostListItem.propTypes = {
 	url: PropTypes.string,
 	text: PropTypes.string,
 	id: PropTypes.number,
+	loggedUserId: PropTypes.number,
+	postUserId: PropTypes.number,
+	deletePost: PropTypes.func,
 	type: PropTypes.string
 }
