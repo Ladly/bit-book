@@ -11,13 +11,14 @@ import { FloatButtons } from './../../Components/FloatButtons/FloatButtons'
 import { TextModal } from './../TextModal/TextModal'
 import { VideoModal } from './../VideoModal/VideoModal'
 import { ImageModal } from './../ImageModal/ImageModal'
+import { SelectOptions } from './../SelectOptions/SelectOptions'
 
 class FeedPage extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			posts: [],
-			loggedUserId: 0
+			loggedUserId: 0,
 		}
 	}
 
@@ -35,7 +36,7 @@ class FeedPage extends Component {
 			.then(profile => this.setState({loggedUserId: profile.userId}))
 	}
 
-	componentDidMount() {
+	componentDidMount() {	
 		this.fetchPosts()
 		this.fetchAuthor()
 		const buttonElement = document.querySelector('.fixed-action-btn')
@@ -47,9 +48,43 @@ class FeedPage extends Component {
 			.then(() => this.fetchPosts())
 	}
 
+	filterPost = (value) => {
+		const { posts } = this.state
+		if(value === 'all') {
+			this.fetchPosts()
+		} else if (value === 'text'){
+			const textPosts = posts.filter(post => {
+				return post.type === 'text'
+			})
+			this.setState({posts:textPosts})
+
+		} else if (value === 'video'){
+			const videoPosts = posts.filter(post => {
+				return post.type === 'video'
+			})
+			this.setState({posts: videoPosts})
+
+		} else if (value === 'image') {
+			const imagePosts = posts.filter(post => {
+				return post.type === 'image'
+			})
+			this.setState({posts: imagePosts})
+		}
+
+	}
+
+	getDataFromOptions = (data) => {
+		this.filterPost(data)
+	}
+
+
 	render() {
+		console.log(this.state.posts)
 		return (
 			<div className="container">
+
+				<SelectOptions getData={this.getDataFromOptions}/>
+			
 				<FeedPost posts={this.state.posts} loggedUserId={this.state.loggedUserId} deletePost={this.deletePost}/>
 
 				<TextModal getFreshData={this.fetchPosts} />
