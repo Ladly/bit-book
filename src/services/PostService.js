@@ -4,7 +4,8 @@ import {
 	TEXT_POST_REQUEST_URL,
 	VIDEO_POST_REQUEST_URL,
 	GETOPTIONS,
-	CREATEOPTIONS
+	CREATEOPTIONS,
+	DEFAULTDELETEOPTIONS
 } from './../helpers/constants'
 
 import {
@@ -27,7 +28,6 @@ export class PostService {
 		const postOptions = CREATEOPTIONS({ text: postText })
 		return fetch(TEXT_POST_REQUEST_URL, postOptions)
 	}
-
 	
 	static postVideoRequest(postVideo) {
 		const postOptions = CREATEOPTIONS({ videoUrl: postVideo })
@@ -63,5 +63,9 @@ export class PostService {
 	static postCommentsPost(data){
 		const postOptions = CREATEOPTIONS(data)
 		return fetch('http://bitbookapi.azurewebsites.net/api/Comments', postOptions)
+	}
+
+	static deletePost(id) {
+		return fetch(`http://bitbookapi.azurewebsites.net/api/Posts/${id}`, DEFAULTDELETEOPTIONS)
 	}
 }

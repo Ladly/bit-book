@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { CardContent } from './../CardContent/CardContent'
 
 export const VideoCard = (props) => {
+
 	const displayCardContent = () => {
 		if(props.type || props.commentsNo){
 			return <CardContent type={props.type} commentsNo={props.commentsNo}/>
@@ -26,5 +27,9 @@ export const VideoCard = (props) => {
 VideoCard.propTypes = {
 	url: PropTypes.string,
 	type: PropTypes.string,
+	loggedUserId: PropTypes.number,
+	postUserId: PropTypes.number,
+	id: PropTypes.number,
+	deletePost: PropTypes.func,
 	commentsNo: PropTypes.number
 }
