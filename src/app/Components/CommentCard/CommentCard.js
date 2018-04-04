@@ -19,7 +19,7 @@ class CommentCard extends Component {
 
 	displayAvatar = () => {
 		if (this.state.author !== null) {
-			return <img src={this.state.author.avatarUrl} alt="" />
+			return <img src={this.state.author.avatarUrl} className="img-responsive circle" alt="" />
 		} else {
 			return <h2>Loading</h2>
 		}
@@ -27,19 +27,19 @@ class CommentCard extends Component {
 
 	render() {
 		return (
-			<div className="row">
-				<div className="col s12">
-					<div className="card">
-						<div className="card-image">
-							{this.displayAvatar()}
-						</div>
-						<span className="card-title">{this.props.authorName}</span>
-						<div className="card-content">
-							<p>{this.props.body}</p>
-						</div>
-					</div>
+
+			<div className="col s12" >
+				<div >
+					{this.displayAvatar()}
 				</div>
-			</div>
+				<div className="col s10">
+					<span className="card-title">{this.props.authorName}</span>
+					<span className="black-text">
+						<p>{this.props.body}</p>
+					</span>
+				</div>
+			</div >
+
 		)
 	}
 }

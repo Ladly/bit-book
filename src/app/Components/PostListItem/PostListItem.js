@@ -9,22 +9,24 @@ import { ImageCard } from './../ImageCard/ImageCard'
 export const PostListItem = (props) => {
 
 	const displayDelete = () => {
-		if(props.loggedUserId === props.postUserId) {
+		if (props.loggedUserId === props.postUserId) {
 			return <button onClick={() => props.deletePost(props.id)} className="waves-effect waves-light btn random-button">Delete</button>
 		}
 	}
 
 
 	const pickType = () => {
-		if(props.type === 'video') {			
+		if (props.type === 'video') {
 			return (
 				<li className="col s12">
-					<Link to={`/details/${props.type}/${props.id}`}>
-						<VideoCard url={props.url} id={props.id} commentsNo={props.commentsNo} type={props.type} />
-					</Link>	
-					{displayDelete()}				
+					<div className="col s12">
+						<Link to={`/details/${props.type}/${props.id}`}>
+							<VideoCard url={props.url} id={props.id} commentsNo={props.commentsNo} type={props.type} />
+						</Link>
+						{displayDelete()}
+					</div>
 				</li>
-			)			
+			)
 		} else if (props.type === 'text') {
 			return (
 				<li>
@@ -34,7 +36,7 @@ export const PostListItem = (props) => {
 					{displayDelete()}
 				</li>
 			)
-		} else if (props.type === 'image'){
+		} else if (props.type === 'image') {
 			return (
 				<li>
 					<Link to={`/details/${props.type}/${props.id}`}>
@@ -42,7 +44,7 @@ export const PostListItem = (props) => {
 					</Link>
 					{displayDelete()}
 				</li>
-			)		
+			)
 		}
 	}
 

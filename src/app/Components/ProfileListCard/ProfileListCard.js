@@ -6,8 +6,8 @@ export const ProfileListCard = (props) => {
 		<div className="row">
 			<div className="col s12">
 				<div className="card">
-					<div className="card-image">
-						<img src={props.avatarUrl} alt=""/>
+					<div className="card-image small">
+						<img src={props.avatarUrl} className="circle responsive-img" alt="" />
 					</div>
 					<div className="card-content">
 						<h4>{props.name}</h4>

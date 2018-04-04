@@ -44,17 +44,17 @@ export const makeYouTubeEmbedded = (url) => {
 	return wellFormatedUrl
 }
 
-export const createCommentsInstance = ({id, authorName, body, dateCreated, postId, authorId}) => {
-	
-	return new Comments (id, authorName, body, dateCreated, postId, authorId)
+export const createCommentsInstance = ({ id, authorName, body, dateCreated, postId, authorId }) => {
+
+	return new Comments(id, authorName, body, dateCreated, postId, authorId)
 }
 
-export const createProfileInstance = ({userId, name, email, aboutShort, about, avatarUrl, postsCount, commentsCount}) => {
+export const createProfileInstance = ({ userId, name, email, aboutShort, about, avatarUrl, postsCount, commentsCount }) => {
 
 	return new Profile(userId, name, email, aboutShort, about, avatarUrl, postsCount, commentsCount)
 }
 
-export const createUsersInstance = ({id, name, aboutShort, lastPostDate, avatarUrl}) => {
+export const createUsersInstance = ({ id, name, aboutShort, lastPostDate, avatarUrl }) => {
 	return new Users(id, name, aboutShort, lastPostDate, avatarUrl)
 }
 

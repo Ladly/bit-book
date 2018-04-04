@@ -9,7 +9,7 @@ class EditProfileModal extends Component {
 
 		this.state = {
 			imageInputValue: '',
-			nameInputValue: '', 
+			nameInputValue: '',
 			aboutInputValue: ''
 		}
 	}
@@ -20,32 +20,32 @@ class EditProfileModal extends Component {
 	}
 
 	imageChange = (value) => {
-		this.setState({imageInputValue: value})
+		this.setState({ imageInputValue: value })
 	}
 
 	nameChange = (value) => {
-		this.setState({nameInputValue: value})
+		this.setState({ nameInputValue: value })
 	}
 
 	aboutChange = (value) => {
-		this.setState({aboutInputValue: value})
+		this.setState({ aboutInputValue: value })
 	}
 
 	handleChange = e => {
 		const { value } = e.target
-		if(e.target.className === 'image') {
+		if (e.target.className === 'image') {
 			this.imageChange(value)
-		} else if(e.target.className === 'name') {
+		} else if (e.target.className === 'name') {
 			this.nameChange(value)
-		} else if(e.target.className === 'about') {
+		} else if (e.target.className === 'about') {
 			this.aboutChange(value)
-		}		
+		}
 	}
 
 	clearInputs = () => {
 		this.setState({
 			imageInputValue: '',
-			nameInputValue: '', 
+			nameInputValue: '',
 			aboutInputValue: ''
 		})
 	}
@@ -54,8 +54,8 @@ class EditProfileModal extends Component {
 		const body = {
 			userId: 0,
 			name: this.state.nameInputValue,
-			email: 'debela',
-			aboutShort: 'volim debelu ladovinu',
+			email: 'kate',
+			aboutShort: 'The most beautiful girl in the world',
 			about: this.state.aboutInputValue,
 			avatarUrl: this.state.imageInputValue,
 			postsCount: 0,
@@ -70,7 +70,7 @@ class EditProfileModal extends Component {
 		return (
 			<div id="modal4" className="modal">
 				<div className="modal-content">
-					<input type="url"  value={this.state.imageInputValue} className="image" onChange={this.handleChange} placeholder="Add image url" />
+					<input type="url" value={this.state.imageInputValue} className="image" onChange={this.handleChange} placeholder="Add image url" />
 					<input type="text" value={this.state.nameInputValue} className="name" onChange={this.handleChange} placeholder="Add name" />
 					<input type="text" value={this.state.aboutInputValue} className="about" onChange={this.handleChange} placeholder="About you" />
 				</div>

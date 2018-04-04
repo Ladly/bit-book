@@ -9,13 +9,14 @@ import FeedPage from './Containers/FeedPage/FeedPage'
 import { PostDetailsPage } from './Containers/PostDetailsPage/PostDetailsPage'
 import { ProfilePage } from './Containers/ProfilePage/ProfilePage'
 import { PeoplePage } from './Containers/PeoplePage/PeoplePage'
+import { Auth } from './Containers/LoginPage/LoginPage'
 
 export const App = () => {
 	return (
 		<div>
 			<Header />
 			<Switch>
-				<Route exact path="/" component={FeedPage} />
+				<Route exact path="/" component={Auth(FeedPage)} />
 				<Route exact path="/details/:type/:id" component={PostDetailsPage} />
 				<Route exact path="/people" component={PeoplePage} />
 				<Route exact path="/profile" component={ProfilePage} />

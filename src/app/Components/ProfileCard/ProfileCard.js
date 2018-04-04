@@ -10,8 +10,8 @@ export const ProfileCard = (props) => {
 				<div className="row">
 					<div className="col s12">
 						<div className="card large">
-							<div className="card-image">
-								<img src={props.profile.avatarUrl} alt="" />
+							<div className="center-align">
+								<img src={props.profile.avatarUrl} className="circle responsive-img" alt="" />
 							</div>
 							<div className="card-content center">
 								<p>{props.profile.aboutShort}</p>

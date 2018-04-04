@@ -77,13 +77,11 @@ class FeedPage extends Component {
 		return <FeedPost posts={postsToDisplay} loggedUserId={this.state.loggedUserId} deletePost={this.deletePost} />
 	}
 
-
 	onPostFilterTypeChange = (type) => {
 		this.setState({ filterType: type })
 	}
 
 	render() {
-		console.log(this.state)
 		return (
 			<div className="container">
 
