@@ -28,17 +28,17 @@ export class PostService {
 		const postOptions = CREATEOPTIONS({ text: postText })
 		return fetch(TEXT_POST_REQUEST_URL, postOptions)
 	}
-	
+
 	static postVideoRequest(postVideo) {
 		const postOptions = CREATEOPTIONS({ videoUrl: postVideo })
 		return fetch(VIDEO_POST_REQUEST_URL, postOptions)
 	}
-	
+
 	static postImageRequest(postImage) {
 		const postOptions = CREATEOPTIONS({ imageUrl: postImage })
 		return fetch(IMAGE_POST_REQUEST_URL, postOptions)
 	}
-	
+
 	static singleTextPostRequest(id, type) {
 		return fetch(`${TEXT_POST_REQUEST_URL}/${id}`, GETOPTIONS)
 			.then(response => response.json())

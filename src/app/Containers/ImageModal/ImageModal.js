@@ -18,7 +18,7 @@ class ImageModal extends Component {
 			id: 3
 		}
 	}
-	
+
 	componentDidMount() {
 		const modalElement3 = document.querySelector('#modal3')
 		this.modal3 = M.Modal.init(modalElement3)
@@ -27,7 +27,7 @@ class ImageModal extends Component {
 	sendData = () => {
 		const body = this.state.inputValue
 		const regexp = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g
-		if(!body.match(regexp)) {
+		if (!body.match(regexp)) {
 			alert('image url not valid')
 			this.modal3.close()
 			this.clearInput()
@@ -57,7 +57,7 @@ class ImageModal extends Component {
 
 	render() {
 		return (
-			<ModalView value={this.state.inputValue} handleChange={this.handleChange} sendData={this.sendData} modalContent={this.modalContent}/>
+			<ModalView value={this.state.inputValue} handleChange={this.handleChange} sendData={this.sendData} modalContent={this.modalContent} />
 		)
 	}
 }

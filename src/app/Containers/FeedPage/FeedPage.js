@@ -19,6 +19,7 @@ class FeedPage extends Component {
 		this.state = {
 			posts: [],
 			loggedUserId: 0,
+			filterType: 'all'
 		}
 	}
 
@@ -33,14 +34,17 @@ class FeedPage extends Component {
 
 	fetchAuthor = () => {
 		ProfileService.fetchProfile()
-			.then(profile => this.setState({loggedUserId: profile.userId}))
+			.then(profile => this.setState({ loggedUserId: profile.userId }))
 	}
 
-	componentDidMount() {	
+	componentDidMount() {
 		this.fetchPosts()
 		this.fetchAuthor()
 		const buttonElement = document.querySelector('.fixed-action-btn')
 		M.FloatingActionButton.init(buttonElement)
+
+		const select = document.querySelector('select')
+		this.instance = M.FormSelect.init(select)
 	}
 
 	deletePost = (id) => {
@@ -48,49 +52,49 @@ class FeedPage extends Component {
 			.then(() => this.fetchPosts())
 	}
 
-	filterPost = (value) => {
-		const { posts } = this.state
-		if(value === 'all') {
-			this.fetchPosts()
-		} else if (value === 'text'){
-			const textPosts = posts.filter(post => {
+	renderPosts = () => {
+		const { posts, filterType } = this.state
+		let postsToDisplay
+
+		if (filterType === 'all') {
+			postsToDisplay = this.state.posts
+		} else if (filterType === 'text') {
+			postsToDisplay = posts.filter(post => {
 				return post.type === 'text'
 			})
-			this.setState({posts:textPosts})
 
-		} else if (value === 'video'){
-			const videoPosts = posts.filter(post => {
+		} else if (filterType === 'video') {
+			postsToDisplay = posts.filter(post => {
 				return post.type === 'video'
 			})
-			this.setState({posts: videoPosts})
 
-		} else if (value === 'image') {
-			const imagePosts = posts.filter(post => {
+		} else if (filterType === 'images') {
+			postsToDisplay = posts.filter(post => {
 				return post.type === 'image'
 			})
-			this.setState({posts: imagePosts})
 		}
 
+		return <FeedPost posts={postsToDisplay} loggedUserId={this.state.loggedUserId} deletePost={this.deletePost} />
 	}
 
-	getDataFromOptions = (data) => {
-		this.filterPost(data)
-	}
 
+	onPostFilterTypeChange = (type) => {
+		this.setState({ filterType: type })
+	}
 
 	render() {
-		console.log(this.state.posts)
+		console.log(this.state)
 		return (
 			<div className="container">
 
-				<SelectOptions getData={this.getDataFromOptions}/>
-			
-				<FeedPost posts={this.state.posts} loggedUserId={this.state.loggedUserId} deletePost={this.deletePost}/>
+				<SelectOptions onTypeChange={this.onPostFilterTypeChange} />
+
+				{this.renderPosts()}
 
 				<TextModal getFreshData={this.fetchPosts} />
 				<VideoModal getFreshData={this.fetchPosts} />
 				<ImageModal getFreshData={this.fetchPosts} />
-				
+
 				<FloatButtons />
 			</div>
 		)
